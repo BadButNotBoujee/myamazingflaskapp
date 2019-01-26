@@ -1,0 +1,61 @@
+from flask import Flask, render_template, request, redirect, url_for, session
+from forms import SignupForm, LogInForm
+from models import database, User
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///flaskapplication'
+
+database.init_app(app)
+app.secret_key = "development-key"
+
+@app.route("/")
+def index():
+	return render_template("index.htm")
+		
+
+@app.route("/write_review")
+def write_review():
+	return render_template("write_review.htm")
+
+@app.route("/sign_out")
+def sign_out:
+	session.clear()
+	return redirect(url_for('index'))
+
+@app.route("/sign_up", methods=['POST', 'GET'])
+def sign_up():
+	signUpForm = SignupForm()
+	logInForm = LogInForm()
+	
+	if request.method == "POST" and signUpForm.validate():
+		new_user = User(signUpForm.username.data, signUpForm.password.data)
+		try:
+			database.session.add(new_user)
+			database.session.commit()
+			session['username'] = new_user.username
+			return redirect(url_for('index'))
+		except:
+			database.session.rollback()
+			return render_template("signup.htm", sign_up_form=form, log_in_form = logInForm, error_message="Pick another username")
+	
+	elif request.method == "POST" and logInForm.validate():
+		input_username = logInForm.username.data
+		input_password = logInForm.password.data
+		
+		records = User.query.filter_by(username=input_username)
+		user = records.first()
+		
+		if user is not None and user.check_password(input_password):
+			session['username'] = input_username
+			session['logged_in'] = True
+			return redirect(url_for('index'))
+		else:
+			return render_template("signup.htm", sign_up_form=signUpForm, log_in_form = logInForm , log_in_error="Can't find your details")
+		
+	elif request.method == "GET" or (request.method == "POST" and signUpForm.validate() == False) or (request.method == "POST" and logInForm.validate() == False):
+		return render_template("signup.htm", sign_up_form=signUpForm, log_in_form = logInForm )
+
+if __name__ == "__main__":
+	app.run(debug=True)
+	
+

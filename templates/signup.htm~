@@ -1,0 +1,60 @@
+{% extends "layout.htm" %}
+
+{% block content %}
+
+<div style="text-align: center;">
+
+
+<div class="login" style="top: 200px; left:25%; margin-right: 20px;">
+	<h2><u>SIGN UP</u></h2>
+	<form method="POST" action="/sign_up">
+		{{sign_up_form.hidden_tag()}}
+		{{sign_up_form.username.label}} 
+		{% if error_message %}
+		<br>
+			<span class="error"> {{error_message}}</span>
+		{% endif %}
+		<br> {{sign_up_form.username}}
+		<br><br>
+		
+		{{sign_up_form.password.label}} 
+		{% if sign_up_form.password.errors %}
+		{% for error in sign_up_form.password.errors %}
+		<br>
+			<span class="error"> {{error}}</span>
+		{% endfor %}
+		{% endif %}
+		<br> {{sign_up_form.password}}
+		<br> <br>
+		
+		{{sign_up_form.copy_password.label}} 
+		{% if sign_up_form.copy_password.errors %}
+		{% for error in sign_up_form.copy_password.errors %}
+		<br>
+			<span class="error"> {{error}}</span>
+		{% endfor %}
+		{% endif %}
+		<br> {{sign_up_form.copy_password}}
+		<br> <br>
+		
+		
+		{{sign_up_form.submit()}}
+	</form>
+</div>
+
+<div class="login" method="POST" style="top: 200px; left:50%; margin-left: 20px;">
+	<h2><u>LOGIN</u></h2>
+	<form method="POST" action="/sign_up">
+		{{log_in_form.hidden_tag()}}
+		{{log_in_form.username.label}} <br> {{log_in_form.username}} <br> <br>
+		{{log_in_form.password.label}} <br> {{log_in_form.password}} <br> <br>
+		{{log_in_form.submit}}
+		<br>
+		<span class="error">{{log_in_error}}</span>
+	</form>
+</div>
+
+
+
+</div>
+{% endblock %}

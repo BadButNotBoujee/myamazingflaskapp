@@ -1,0 +1,36 @@
+<html>
+
+	<head>
+		<title> My AMAZING flask app</title>	
+		<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"/>
+	</head>
+
+
+	<body>
+		<div style="text-align: center; ">
+		
+		<div style="display: inline;"><img class= "coffee" src="static/img/RPKT.gif">  </div>
+		<div style="display: inline;"><h1> <u>MY AMAZING FLASK APP!</u></h1> </div>
+		<div style="display: inline;"><img class= "coffee" src="static/img/RPKT.gif">  </div>
+		
+	
+		</div>
+		
+		<div style="position: sticky; background-color: white; text-align: center;">
+		<hr>
+		<a href="{{url_for('index')}}" >HOMEPAGE</a> &nbsp &nbsp
+		<a href="{{url_for('write_review')}}" >WRITE A REVIEW</a> &nbsp &nbsp
+		{%if session.logged_in%}
+		{%else%}
+		<a href="{{url_for('sign_up')}}" >LOG IN</a> 
+		{%endif%}
+		<hr>
+		</div>
+		
+		{% block content %}
+		{% endblock %}
+		
+	</body>
+	
+
+</html>

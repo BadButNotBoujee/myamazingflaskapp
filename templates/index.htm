@@ -1,0 +1,11 @@
+{% extends "layout.htm" %}
+
+{% block content %}
+
+<div style="text-align: center;">
+	<h2><u>WEEKLY POSTS</u></h2>
+	{% if session.logged_in %}
+		<p>You are logged in as: {{session.username}}</p>
+	{% endif %}
+</div>
+{% endblock %}

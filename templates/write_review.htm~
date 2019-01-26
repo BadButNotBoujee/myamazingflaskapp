@@ -1,0 +1,14 @@
+{% extends "layout.htm" %}
+
+{% block content %}
+
+<div style="text-align: center;">
+	<h2><u>WRITE A REVIEW</u></h2>
+	<form>
+		<input class="form_input" type="text" placeholder="Coffee Shop Name"/> <br>
+		<input class="form_input" type="text" placeholder="Title"/> <br>
+		<textarea cols="10" placeholder="Review Details" ></textarea>	 <br>
+		<button class="form_input" type="submit">Submit</button>
+	</form>
+</div>
+{% endblock %}
