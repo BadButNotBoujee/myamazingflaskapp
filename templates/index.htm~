@@ -3,9 +3,17 @@
 {% block content %}
 
 <div style="text-align: center;">
-	<h2><u>WEEKLY POSTS</u></h2>
-	{% if session.username %}
+	<h2><u>REVIEW INDEX</u></h2>
+	{% if session.logged_in %}
 		<p>You are logged in as: {{session.username}}</p>
 	{% endif %}
+	{% if message %}
+		<p style="color:red;">{{ message }}</p>
+	{% endif %}
+
+	{%for record in records %}
+		<a href="{{url_for('read', id = record.review_id)}}" > {{record.title}} || {{record.coffee_shop}} </a>
+	{% endfor %}	
+	
 </div>
 {% endblock %}

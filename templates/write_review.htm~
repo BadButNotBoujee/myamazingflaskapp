@@ -4,11 +4,50 @@
 
 <div style="text-align: center;">
 	<h2><u>WRITE A REVIEW</u></h2>
-	<form>
-		<input class="form_input" type="text" placeholder="Coffee Shop Name"/> <br>
-		<input class="form_input" type="text" placeholder="Title"/> <br>
-		<textarea cols="10" placeholder="Review Details" ></textarea>	 <br>
-		<button class="form_input" type="submit">Submit</button>
+	{{message}}
+	<form method="POST" action="/write_review">
+		{{review_form.hidden_tag()}}
+		
+		{{review_form.title.label}}
+		<br>
+		{{review_form.title(class="review_field")}}
+		{% for error in review_form.title.errors %}
+		<br>
+			<span class="error"> {{error}}</span>
+		{% endfor %}
+		<br><br>
+		
+		
+		
+		
+		{{review_form.coffee_shop.label}}
+		<br>
+		{{review_form.coffee_shop(class="review_field")}}
+			{% for error in review_form.coffee_shop.errors %}
+		<br>
+			<span class="error"> {{error}}</span>
+		{% endfor %}
+		<br><br>
+		
+	
+		
+		
+		{{review_form.rating.label}}
+		<br>
+		{{review_form.rating}}
+		{% for error in review_form.rating.errors %}
+		<br>
+			<span class="error"> {{error}}</span>
+		{% endfor %}		
+		<br><br>
+		
+		
+		
+		{{review_form.description.label}}
+		<br>
+		{{review_form.description(class="review_text_area")}}
+		<br><br>
+		{{review_form.submit}}
 	</form>
 </div>
 {% endblock %}

@@ -21,8 +21,9 @@ class User(database.Model):
 
 
 class Review(database.Model):
-	review_ID = database.Column(database.Integer, primary_key=True)
-	username = database.Column(database.String(255))
+	__tablename__ = "review"
+	review_id = database.Column(database.Integer, primary_key=True)
+	username = database.Column(database.String(255), database.ForeignKey('users.username'))
 	coffee_shop = database.Column(database.String(255))
 	rating = database.Column(database.Integer)
 	title = database.Column(database.String(255))
@@ -30,9 +31,9 @@ class Review(database.Model):
 
 	def __init__(self, username, coffee_shop, rating, title, description):
 		self.username = username
-		self.coffee_shop = coffee_shop.Title
+		self.coffee_shop = coffee_shop.title()
 		self.rating = rating
-		self.title = title.Title
+		self.title = title.title()
 		self.description = description
 
 	 

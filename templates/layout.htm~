@@ -9,9 +9,9 @@
 	<body>
 		<div style="text-align: center; ">
 		
-		<div style="display: inline;"><img class= "coffee" src="static/img/RPKT.gif">  </div>
-		<div style="display: inline;"><h1> <u>MY AMAZING FLASK APP!</u></h1> </div>
-		<div style="display: inline;"><img class= "coffee" src="static/img/RPKT.gif">  </div>
+		<div style="display: inline;"><img class= "coffee" src="url_for('static', filename='img/RPKT.gif')">  </div>
+		<div style="display: inline;"><h1> <u>MY AMAZING FLASK APP!</u></h1></div>
+		<div style="display: inline;"><img class= "coffee" src="url_for('static', filename='img/RPKT.gif')">  </div>
 		
 	
 		</div>
@@ -21,6 +21,7 @@
 		<a href="{{url_for('index')}}" >HOMEPAGE</a> &nbsp &nbsp
 		<a href="{{url_for('write_review')}}" >WRITE A REVIEW</a> &nbsp &nbsp
 		{%if session.logged_in%}
+		<a href="{{url_for('sign_out')}}" >LOG OUT</a> 
 		{%else%}
 		<a href="{{url_for('sign_up')}}" >LOG IN</a> 
 		{%endif%}

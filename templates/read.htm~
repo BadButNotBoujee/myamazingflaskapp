@@ -1,0 +1,12 @@
+{% extends "layout.htm" %}
+
+{% block content %}
+
+<div style="text-align: center;">
+	<h2><u>{{record.title}}</u></h2>
+	
+	<h3>{{record.coffee_shop}} &nbsp || &nbsp  Rating: {{record.rating}} / 5</h3>
+	<p style="padding-left: 100px; padding-right: 100px;"> {{record.description}} </p>
+</div>
+
+{% endblock %}

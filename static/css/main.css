@@ -23,8 +23,12 @@ span {
 
 }
 
-textarea{
-	width: 300px;
+.review_field{
+	width: 500px;
+}
+
+.review_text_area{
+	width: 500px;
 	height: 300px;
 	font-size: 14px;
 }

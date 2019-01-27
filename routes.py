@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from forms import SignupForm, LogInForm
-from models import database, User
+from forms import SignupForm, LogInForm, ReviewForm
+from models import database, User, Review
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///flaskapplication'
@@ -10,13 +10,32 @@ app.secret_key = "development-key"
 
 @app.route("/")
 def index():
-	return render_template("index.htm")
+	review_records = Review.query.all()
+	return render_template("index.htm", records = review_records)
 		
-
-@app.route("/write_review")
+@app.route("/read_review/<id>")
+def read(id):
+	review = Review.query.filter_by(review_id = id).first()
+	return render_template("read.htm", record=review)
+		
+@app.route("/write_review", methods=['GET','POST'])
 def write_review():
-	return render_template("write_review.htm")
-
+	if "logged_in" in session:
+		write_review_form = ReviewForm()
+		if request.method == "POST" and write_review_form.validate():
+			new_review= Review(session['username'], write_review_form.coffee_shop.data, write_review_form.rating.data, write_review_form.title.data, write_review_form.description.data)
+			try:
+				database.session.add(new_review)
+				database.session.commit()
+				return redirect(url_for('index'))
+			except:
+				database.session.rollback()
+				return render_template("write_review.htm", review_form = write_review_form, message="Error: Try again")
+		else:
+			return render_template("write_review.htm", review_form = write_review_form)	
+	else:
+		return render_template("index.htm", message="You need to log in")
+	
 @app.route("/sign_out")
 def sign_out():
 	session.clear()
@@ -24,6 +43,9 @@ def sign_out():
 
 @app.route("/sign_up", methods=['POST', 'GET'])
 def sign_up():
+	if "logged_in" in session:
+		return redirect(url_for('index'))
+		
 	signUpForm = SignupForm()
 	logInForm = LogInForm()
 	
