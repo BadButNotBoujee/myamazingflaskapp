@@ -16,7 +16,6 @@ MarkupSafe==1.1.0
 networkx==2.1
 numpy==1.14.1
 olefile==0.44
-openshot==1.4.0
 Pillow==4.1.1
 psycopg2==2.7.4
 psycopg2-binary==2.7.4
