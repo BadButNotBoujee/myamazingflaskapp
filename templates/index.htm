@@ -7,13 +7,15 @@
 	{% if session.logged_in %}
 		<p>You are logged in as: {{session.username}}</p>
 	{% endif %}
+
+	
 	{% if message %}
 		<p style="color:red;">{{ message }}</p>
 	{% endif %}
-
+	{% if records %}
 	{%for record in records %}
 		<a href="{{url_for('read', id = record.review_id)}}" > {{record.title}} || {{record.coffee_shop}} </a>
 	{% endfor %}	
-	
+	{% endif %}
 </div>
 {% endblock %}

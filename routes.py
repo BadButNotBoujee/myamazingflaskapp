@@ -10,8 +10,8 @@ app.secret_key = "development-key"
 
 @app.route("/")
 def index():
-	review_records = Review.query.all()
-	return render_template("index.htm", records = review_records)
+	#review_records = Review.query.all()
+	return render_template("index.htm", records = None)
 		
 @app.route("/read_review/<id>")
 def read(id):
