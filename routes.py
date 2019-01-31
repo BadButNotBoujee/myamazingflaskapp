@@ -3,8 +3,8 @@ from forms import SignupForm, LogInForm, ReviewForm
 from models import database, User, Review
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///flaskapplication'
-
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///flaskapplication'
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://imudsikyzdilcq:4753bf8ab220ab96f32103ec8f86fe8aa13f60f607b7a5ce3132db10cfac5651@ec2-54-221-253-228.compute-1.amazonaws.com:5432/d1umrtn5e22sip"
 database.init_app(app)
 app.secret_key = "development-key"
 
